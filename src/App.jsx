@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, createContext, useContext, useReducer } from "react";
 
 // ============================================================
-// FIREBASE CONFIG — Replace with your own Firebase project keys
+// FIREBASE CONFIG -- Replace with your own Firebase project keys
 // Get them from: https://console.firebase.google.com
 // ============================================================
 const FIREBASE_CONFIG = {
@@ -40,7 +40,7 @@ async function initFirebase() {
 // ============================================================
 // CONSTANTS
 // ============================================================
-const ICONS  = ["⚡","🔥","💎","🎯","📊","🧠","🚀","💡","🔬","📈","🌊","⚙️","🎨","📝","🔑","💰","📱","🌐","🏆","⭐"];
+const ICONS  = ["Z","🔥","💎","🎯","📊","🧠","🚀","💡","🔬","📈","🌊","G","🎨","📝","🔑","💰","📱","🌐","🏆","S"];
 const COLORS = ["#6366f1","#8b5cf6","#ec4899","#f43f5e","#f97316","#eab308","#22c55e","#06b6d4","#3b82f6","#a855f7"];
 const ENTRY_TYPES = ["note","task","link","file","image"];
 
@@ -65,7 +65,7 @@ const SEED_MODELS = [
         ]},
       { id:"f2", name:"QT Sequences", collapsed:false, createdAt:now(),
         entries:[
-          {id:"e3",type:"note",title:"Q3 Weekly → Q1 Daily Bearish",content:"When weekly Q3 aligns with daily Q1, bearish continuation is extremely high probability.",pinned:false,tags:["QT","HTF"],createdAt:now(),updatedAt:now()},
+          {id:"e3",type:"note",title:"Q3 Weekly -> Q1 Daily Bearish",content:"When weekly Q3 aligns with daily Q1, bearish continuation is extremely high probability.",pinned:false,tags:["QT","HTF"],createdAt:now(),updatedAt:now()},
         ]},
     ]
   },
@@ -76,8 +76,8 @@ const SEED_MODELS = [
     folders:[
       { id:"f3", name:"May 2025", collapsed:false, createdAt:now(),
         entries:[
-          {id:"e4",type:"note",title:"NQ Long — May 6",content:"Entry: 19,840. Target: 19,920. SL: 19,800. Result: +80pts.",pinned:true,tags:["NQ","Win"],createdAt:now(),updatedAt:now()},
-          {id:"e5",type:"note",title:"ES Short — May 5",content:"Entry: 5,610. Target: 5,590. SL: 5,620. Result: +20pts.",pinned:false,tags:["ES","Win"],createdAt:now(),updatedAt:now()},
+          {id:"e4",type:"note",title:"NQ Long -- May 6",content:"Entry: 19,840. Target: 19,920. SL: 19,800. Result: +80pts.",pinned:true,tags:["NQ","Win"],createdAt:now(),updatedAt:now()},
+          {id:"e5",type:"note",title:"ES Short -- May 5",content:"Entry: 5,610. Target: 5,590. SL: 5,620. Result: +20pts.",pinned:false,tags:["ES","Win"],createdAt:now(),updatedAt:now()},
         ]},
       { id:"f4", name:"Statistics", collapsed:true, createdAt:now(),
         entries:[
@@ -92,7 +92,7 @@ const SEED_MODELS = [
     folders:[
       { id:"f5", name:"Entry Models", collapsed:false, createdAt:now(),
         entries:[
-          {id:"e7",type:"note",title:"London Sweep Model",content:"Criteria: Asia range clear → London sweeps one side in first 30min → M5 displacement → FVG entry.",pinned:true,tags:["London","Entry"],createdAt:now(),updatedAt:now()},
+          {id:"e7",type:"note",title:"London Sweep Model",content:"Criteria: Asia range clear -> London sweeps one side in first 30min -> M5 displacement -> FVG entry.",pinned:true,tags:["London","Entry"],createdAt:now(),updatedAt:now()},
           {id:"e8",type:"note",title:"Silver Bullet 10:00-11:00",content:"FVG delivery window. Best when London created clear draw and displacement.",pinned:false,tags:["Silver Bullet","M5"],createdAt:now(),updatedAt:now()},
         ]},
     ]
@@ -108,10 +108,10 @@ const SEED_ACTIVITY = [
 const AI_RESPONSES = {
   default: "I'm your Vaultspace AI assistant. I can help you analyze your notes, find patterns, summarize research, and suggest connections between your models. What would you like to explore?",
   ssmt: "Based on your SSMT notes, I've identified 3 recurring patterns: (1) M15 SSMT aligns with 4H FVG in 84% of NY AM entries, (2) London session sweeps precede your highest-confidence setups, (3) Tuesday shows the most SSMT documented cases. Would you like me to create a discovery from this?",
-  journal: "Your Trade Journal shows a 73% win rate with a 2.1 profit factor. Your best performance is on Wednesdays using the AMDX model. I notice you haven't logged any trades this week — would you like to add an entry?",
+  journal: "Your Trade Journal shows a 73% win rate with a 2.1 profit factor. Your best performance is on Wednesdays using the AMDX model. I notice you haven't logged any trades this week -- would you like to add an entry?",
   strategy: "Your Strategy Vault has 2 confirmed models. The London Sweep Model appears in 9 of your 14 winning entries. I recommend linking it to your SSMT studies as they share 4 common confluence factors.",
   summary: "Here's your workspace summary: 3 models, 5 folders, 8 entries total. 3 pinned items. Most active model: Research Hub. Strongest pattern: SSMT + NY AM confluence. Suggested action: Add more evidence to your QT Sequences folder.",
-  help: "I can help you with: \n• Summarizing your notes\n• Finding patterns across models\n• Suggesting new entries\n• Analyzing your trade journal\n• Creating discovery connections\n\nJust ask me anything about your research!",
+  help: "I can help you with: \n* Summarizing your notes\n* Finding patterns across models\n* Suggesting new entries\n* Analyzing your trade journal\n* Creating discovery connections\n\nJust ask me anything about your research!",
 };
 
 const getAIResponse = (msg) => {
@@ -144,7 +144,6 @@ function reducer(state, action) {
     case "SET_ACTIVE_ENTRY":return {...state, activeEntryId:action.payload};
     case "SET_SEARCH":      return {...state, searchQuery:action.payload};
     case "TOGGLE_SIDEBAR":  return {...state, sidebarOpen:!state.sidebarOpen};
-    case "OPEN_SIDEBAR":    return {...state, sidebarOpen:true};
     case "CLOSE_SIDEBAR":   return {...state, sidebarOpen:false};
     case "SET_TOAST":       return {...state, toast:action.payload};
     case "CLEAR_TOAST":     return {...state, toast:null};
@@ -152,7 +151,7 @@ function reducer(state, action) {
     case "CLOSE_MODAL":     return {...state, modal:null};
 
     case "CREATE_MODEL": {
-      const m = {id:genId(),name:"New Model",icon:"⚡",color:COLORS[0],description:"",createdAt:now(),updatedAt:now(),pinned:false,folders:[],...action.payload};
+      const m = {id:genId(),name:"New Model",icon:"Z",color:COLORS[0],description:"",createdAt:now(),updatedAt:now(),pinned:false,folders:[],...action.payload};
       return {...state, models:[...state.models,m], activeModelId:m.id,
         activity:[{id:genId(),action:"Created model",target:m.name,model:m.name,time:now()},...state.activity]};
     }
@@ -221,9 +220,11 @@ function reducer(state, action) {
 const StoreContext = createContext(null);
 function StoreProvider({children}) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const toastTimerRef = useRef(null);
   const toast = useCallback((msg, type="success") => {
+    if(toastTimerRef.current) clearTimeout(toastTimerRef.current);
     dispatch({type:"SET_TOAST",payload:{msg,type,id:genId()}});
-    setTimeout(()=>dispatch({type:"CLEAR_TOAST"}), 3500);
+    toastTimerRef.current = setTimeout(()=>dispatch({type:"CLEAR_TOAST"}), 3500);
   },[]);
   return <StoreContext.Provider value={{state,dispatch,toast}}>{children}</StoreContext.Provider>;
 }
@@ -253,17 +254,17 @@ html,body,#root{height:100%;background:var(--bg);color:var(--t);font-family:var(
 input,textarea,select,button{font-family:var(--ff);}
 button{cursor:pointer;}
 
-/* ── SHELL ── */
+/* -- SHELL -- */
 .shell{display:flex;height:100vh;overflow:hidden;position:relative;}
 
-/* ── SIDEBAR OVERLAY (mobile) ── */
+/* -- SIDEBAR OVERLAY (mobile) -- */
 .sidebar-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:90;
   backdrop-filter:blur(2px);cursor:pointer;
   animation:fadeIn .2s ease;
 }
 
-/* ── SIDEBAR ── */
+/* -- SIDEBAR -- */
 .sidebar{
   width:var(--nav-w);flex-shrink:0;background:var(--bg1);
   border-right:1px solid var(--b);display:flex;flex-direction:column;
@@ -273,24 +274,24 @@ button{cursor:pointer;}
 }
 .sidebar.open{transform:translateX(0);}
 
-/* ── MAIN ── */
+/* -- MAIN -- */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);width:100%;}
 
-/* ── TOPBAR ── */
+/* -- TOPBAR -- */
 .topbar{height:54px;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:10px;padding:0 16px;flex-shrink:0;background:var(--bg1);}
 
-/* ── WORKSPACE ── */
+/* -- WORKSPACE -- */
 .workspace{flex:1;display:flex;overflow:hidden;}
 .panel{flex:1;overflow-y:auto;padding:24px;}
 
-/* ── DETAIL PANEL ── */
+/* -- DETAIL PANEL -- */
 .detail-panel{width:400px;flex-shrink:0;border-left:1px solid var(--b);background:var(--bg1);overflow-y:auto;display:flex;flex-direction:column;}
 
-/* ── AUTH ── */
+/* -- AUTH -- */
 .auth-shell{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);background-image:radial-gradient(circle at 20% 50%,rgba(99,102,241,0.1) 0%,transparent 60%),radial-gradient(circle at 80% 20%,rgba(139,92,246,0.07) 0%,transparent 50%);padding:20px;}
 .auth-card{background:var(--bg1);border:1px solid var(--b2);border-radius:var(--r3);padding:36px;width:100%;max-width:420px;box-shadow:var(--shadow);}
 
-/* ── SIDEBAR INNER ── */
+/* -- SIDEBAR INNER -- */
 .sb-head{padding:16px;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .sb-logo{font-size:15px;font-weight:700;background:var(--ag);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;flex:1;}
 .sb-close{width:28px;height:28px;border-radius:8px;background:var(--bg2);border:none;display:flex;align-items:center;justify-content:center;color:var(--t3);cursor:pointer;flex-shrink:0;}
@@ -306,14 +307,14 @@ button{cursor:pointer;}
 .sb-user:hover{background:var(--bg2);}
 .avatar{width:30px;height:30px;border-radius:8px;background:var(--ag);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;}
 
-/* ── TOPBAR BTNS ── */
+/* -- TOPBAR BTNS -- */
 .tb-btn{width:32px;height:32px;border-radius:var(--r);background:transparent;border:1px solid transparent;color:var(--t3);display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
 .tb-btn:hover{background:var(--bg2);color:var(--t);border-color:var(--b);}
 .tb-search{flex:1;max-width:420px;display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:6px 12px;}
 .tb-search input{flex:1;background:none;border:none;outline:none;color:var(--t);font-size:13px;}
 .tb-search input::placeholder{color:var(--t3);}
 
-/* ── BUTTONS ── */
+/* -- BUTTONS -- */
 .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--r);border:none;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap;}
 .btn-primary{background:var(--ag);color:#fff;box-shadow:0 2px 12px rgba(99,102,241,.3);}
 .btn-primary:hover{opacity:.9;transform:translateY(-1px);}
@@ -330,12 +331,12 @@ button{cursor:pointer;}
 .btn-icon:hover{background:var(--bg3);color:var(--t);border-color:var(--b);}
 .w-full{width:100%;}
 
-/* ── CARDS ── */
+/* -- CARDS -- */
 .card{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r2);padding:20px;transition:border-color .15s;}
 .card:hover{border-color:var(--b2);}
 .card-sm{padding:14px;}
 
-/* ── MODEL GRID ── */
+/* -- MODEL GRID -- */
 .model-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
 .model-card{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r2);padding:20px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
 .model-card:hover{border-color:var(--b2);transform:translateY(-2px);box-shadow:var(--shadow);}
@@ -343,7 +344,7 @@ button{cursor:pointer;}
 .model-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;}
 .model-meta{display:flex;gap:12px;font-size:11px;color:var(--t3);font-family:var(--fm);}
 
-/* ── FOLDER ── */
+/* -- FOLDER -- */
 .folder-wrap{margin-bottom:10px;}
 .folder-head{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);cursor:pointer;transition:all .15s;user-select:none;}
 .folder-head:hover{background:var(--bg3);border-color:var(--b2);}
@@ -352,7 +353,7 @@ button{cursor:pointer;}
 .folder-body{padding:6px 0 0 12px;}
 .folder-collapsed .folder-body{display:none;}
 
-/* ── ENTRIES ── */
+/* -- ENTRIES -- */
 .entry-card{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg3);border:1px solid transparent;border-radius:var(--r);margin-bottom:5px;cursor:pointer;transition:all .15s;}
 .entry-card:hover{border-color:var(--b);background:var(--bg4);}
 .entry-card.active{border-color:var(--a);background:rgba(99,102,241,.07);}
@@ -360,11 +361,11 @@ button{cursor:pointer;}
 .entry-actions{display:none;gap:2px;flex-shrink:0;}
 .entry-card:hover .entry-actions{display:flex;}
 
-/* ── DETAIL PANEL ── */
+/* -- DETAIL PANEL -- */
 .dp-head{padding:14px 16px;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .dp-body{flex:1;padding:18px;overflow-y:auto;}
 
-/* ── FORM ── */
+/* -- FORM -- */
 .form-group{margin-bottom:14px;}
 .form-label{display:block;font-size:11px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--t3);margin-bottom:5px;}
 .form-input{width:100%;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:9px 12px;color:var(--t);font-size:13.5px;outline:none;transition:border-color .15s;}
@@ -374,7 +375,7 @@ button{cursor:pointer;}
 .form-select{width:100%;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);padding:9px 12px;color:var(--t);font-size:13px;outline:none;appearance:none;}
 .form-error{color:var(--red);font-size:12px;margin-top:4px;}
 
-/* ── MODAL ── */
+/* -- MODAL -- */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:16px;}
 .modal{background:var(--bg1);border:1px solid var(--b2);border-radius:var(--r3);padding:26px;width:100%;max-width:480px;box-shadow:var(--shadow);animation:modalIn .2s ease;max-height:90vh;overflow-y:auto;}
 .modal-sm{max-width:360px;}
@@ -383,7 +384,7 @@ button{cursor:pointer;}
 .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
 .modal-title{font-size:17px;font-weight:700;}
 
-/* ── TOAST ── */
+/* -- TOAST -- */
 .toast-wrap{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:500;}
 .toast{display:flex;align-items:center;gap:10px;padding:12px 18px;background:var(--bg1);border:1px solid var(--b2);border-radius:var(--r2);box-shadow:var(--shadow);font-size:13px;animation:toastIn .25s ease;white-space:nowrap;max-width:90vw;}
 .toast.success{border-color:rgba(34,197,94,.35);color:var(--green);}
@@ -392,13 +393,13 @@ button{cursor:pointer;}
 .toast.warning{border-color:rgba(245,158,11,.35);color:var(--gold);}
 @keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
-/* ── STATS ── */
+/* -- STATS -- */
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:24px;}
 .stat-card{background:var(--bg2);border:1px solid var(--b);border-radius:var(--r2);padding:16px;}
 .stat-val{font-size:28px;font-weight:700;font-family:var(--fm);margin-bottom:4px;}
 .stat-label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;}
 
-/* ── TAGS ── */
+/* -- TAGS -- */
 .tags-input-wrap{display:flex;flex-wrap:wrap;gap:5px;padding:6px 8px;background:var(--bg2);border:1px solid var(--b);border-radius:var(--r);min-height:38px;align-items:center;cursor:text;}
 .tags-input-wrap:focus-within{border-color:var(--a);}
 .tag-chip{display:flex;align-items:center;gap:3px;padding:2px 7px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);border-radius:4px;font-size:10px;color:var(--a2);}
@@ -406,21 +407,21 @@ button{cursor:pointer;}
 .tag-chip-x:hover{opacity:1;}
 .tags-input{background:none;border:none;outline:none;color:var(--t);font-size:12px;min-width:60px;flex:1;}
 
-/* ── BADGES ── */
+/* -- BADGES -- */
 .badge{padding:2px 7px;border-radius:4px;font-size:10px;font-family:var(--fm);font-weight:600;}
 .badge-purple{background:rgba(99,102,241,.15);color:var(--a2);border:1px solid rgba(99,102,241,.25);}
 .badge-green{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.2);}
 .badge-gold{background:rgba(245,158,11,.12);color:var(--gold);border:1px solid rgba(245,158,11,.2);}
 .badge-red{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2);}
 
-/* ── ACTIVITY ── */
+/* -- ACTIVITY -- */
 .activity-dot{width:8px;height:8px;border-radius:50%;background:var(--a);flex-shrink:0;margin-top:4px;}
 
-/* ── EMPTY ── */
+/* -- EMPTY -- */
 .empty{text-align:center;padding:48px 24px;}
 .empty-icon{font-size:36px;margin-bottom:12px;}
 
-/* ── ICON / COLOR PICKER ── */
+/* -- ICON / COLOR PICKER -- */
 .icon-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;}
 .icon-opt{width:32px;height:32px;border-radius:6px;border:1px solid var(--b);background:var(--bg2);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
 .icon-opt:hover,.icon-opt.sel{background:var(--bg3);border-color:var(--a);}
@@ -428,12 +429,12 @@ button{cursor:pointer;}
 .color-opt{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;}
 .color-opt:hover,.color-opt.sel{transform:scale(1.25);border-color:#fff;}
 
-/* ── SEARCH RESULTS ── */
+/* -- SEARCH RESULTS -- */
 .search-dropdown{position:absolute;top:54px;left:0;right:0;z-index:50;background:var(--bg1);border-bottom:1px solid var(--b2);padding:12px;box-shadow:var(--shadow);max-height:380px;overflow-y:auto;}
 .search-result{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--r);cursor:pointer;transition:all .15s;}
 .search-result:hover{background:var(--bg2);}
 
-/* ── AI CHAT ── */
+/* -- AI CHAT -- */
 .ai-shell{display:flex;flex-direction:column;height:100%;overflow:hidden;}
 .ai-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;}
 .ai-msg{max-width:85%;}
@@ -455,13 +456,13 @@ button{cursor:pointer;}
 .ai-dot:nth-child(3){animation-delay:.4s;}
 @keyframes aiBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
 
-/* ── EMAIL VERIFICATION BANNER ── */
+/* -- EMAIL VERIFICATION BANNER -- */
 .verify-banner{background:rgba(245,158,11,.1);border-bottom:1px solid rgba(245,158,11,.25);padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--gold);flex-shrink:0;}
 
-/* ── DIVIDER ── */
+/* -- DIVIDER -- */
 .divider{height:1px;background:var(--b);margin:14px 0;}
 
-/* ── MISC ── */
+/* -- MISC -- */
 .flex{display:flex;align-items:center;}
 .gap-6{gap:6px;}
 .gap-8{gap:8px;}
@@ -481,13 +482,13 @@ button{cursor:pointer;}
 .progress{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;}
 .progress-bar{height:100%;border-radius:2px;background:var(--ag);}
 
-/* ── ANIMATIONS ── */
+/* -- ANIMATIONS -- */
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .fade-in{animation:fadeIn .2s ease;}
 .slide-in{animation:slideIn .25s ease;}
 
-/* ── RESPONSIVE ── */
+/* -- RESPONSIVE -- */
 @media(max-width:640px){
   .detail-panel{position:fixed;right:0;top:0;height:100%;z-index:95;width:100%!important;}
   .panel{padding:16px;}
@@ -543,11 +544,11 @@ const SVG = ({n, s=16, c="currentColor"}) => {
 function Toast() {
   const {state} = useStore();
   if (!state.toast) return null;
-  const icons = {success:"✓", error:"✕", info:"ℹ", warning:"⚠"};
+  const icons = {success:"v", error:"x", info:"i", warning:"!"};
   return (
     <div className="toast-wrap">
       <div className={`toast ${state.toast.type||"info"}`}>
-        <span>{icons[state.toast.type]||"ℹ"}</span>
+        <span>{icons[state.toast.type]||"i"}</span>
         {state.toast.msg}
       </div>
     </div>
@@ -593,16 +594,16 @@ function TagsInput({value=[], onChange}) {
     <div className="tags-input-wrap">
       {value.map(t=>(
         <span key={t} className="tag-chip">
-          {t}<span className="tag-chip-x" onClick={()=>onChange(value.filter(x=>x!==t))}>×</span>
+          {t}<span className="tag-chip-x" onClick={()=>onChange(value.filter(x=>x!==t))}>x</span>
         </span>
       ))}
-      <input className="tags-input" value={inp} onChange={e=>setInp(e.target.value)} onKeyDown={add} placeholder={value.length?"":"Add tags…"}/>
+      <input className="tags-input" value={inp} onChange={e=>setInp(e.target.value)} onKeyDown={add} placeholder={value.length?"":"Add tags..."}/>
     </div>
   );
 }
 
 // ============================================================
-// AUTH SCREEN — Real Firebase + Email Verification
+// AUTH SCREEN -- Real Firebase + Email Verification
 // ============================================================
 function AuthScreen() {
   const {dispatch, toast} = useStore();
@@ -616,7 +617,7 @@ function AuthScreen() {
 
   const clearErr = () => setError("");
 
-  // ── GOOGLE SIGN IN (real popup) ──
+  // -- GOOGLE SIGN IN (real popup) --
   const handleGoogle = async () => {
     setLoading(true); setError("");
     try {
@@ -641,7 +642,7 @@ function AuthScreen() {
       // Fallback demo mode if Firebase not configured
       if (e.message.includes("not configured") || e.message.includes("invalid-api-key") || e.code === "auth/invalid-api-key") {
         dispatch({type:"LOGIN", payload:{id:"demo",name:"Demo User",email:"demo@example.com",avatar:"DU",plan:"Pro",emailVerified:true}});
-        toast("Demo mode — configure Firebase for real auth","warning");
+        toast("Demo mode -- configure Firebase for real auth","warning");
       } else if (e.code === "auth/popup-closed-by-user") {
         setError("Sign-in cancelled. Please try again.");
       } else {
@@ -651,7 +652,7 @@ function AuthScreen() {
     setLoading(false);
   };
 
-  // ── EMAIL LOGIN ──
+  // -- EMAIL LOGIN --
   const handleLogin = async () => {
     if (!email || !pass) { setError("Please fill in all fields"); return; }
     setLoading(true); setError("");
@@ -671,7 +672,7 @@ function AuthScreen() {
       if (e.message.includes("not configured") || e.code === "auth/invalid-api-key") {
         // Demo fallback
         dispatch({type:"LOGIN", payload:{id:"demo",name:email.split("@")[0],email,avatar:email.slice(0,2).toUpperCase(),plan:"Pro",emailVerified:true}});
-        toast("Demo mode — configure Firebase for real auth","warning");
+        toast("Demo mode -- configure Firebase for real auth","warning");
       } else if (e.code==="auth/wrong-password"||e.code==="auth/user-not-found") {
         setError("Incorrect email or password.");
       } else if (e.code==="auth/too-many-requests") {
@@ -683,7 +684,7 @@ function AuthScreen() {
     setLoading(false);
   };
 
-  // ── EMAIL SIGNUP with verification ──
+  // -- EMAIL SIGNUP with verification --
   const handleSignup = async () => {
     if (!name || !email || !pass) { setError("Please fill in all fields"); return; }
     if (pass.length < 6) { setError("Password must be at least 6 characters"); return; }
@@ -700,7 +701,7 @@ function AuthScreen() {
     } catch(e) {
       if (e.message.includes("not configured") || e.code === "auth/invalid-api-key") {
         dispatch({type:"LOGIN", payload:{id:"demo",name,email,avatar:name.slice(0,2).toUpperCase(),plan:"Pro",emailVerified:true}});
-        toast("Demo mode — configure Firebase for real auth","warning");
+        toast("Demo mode -- configure Firebase for real auth","warning");
       } else if (e.code==="auth/email-already-in-use") {
         setError("This email is already registered. Try signing in.");
       } else {
@@ -710,7 +711,7 @@ function AuthScreen() {
     setLoading(false);
   };
 
-  // ── VERIFICATION SENT SCREEN ──
+  // -- VERIFICATION SENT SCREEN --
   if (verificationSent) {
     return (
       <div className="auth-shell">
@@ -749,7 +750,7 @@ function AuthScreen() {
             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
           </svg>
-          {loading ? "Connecting…" : "Continue with Google"}
+          {loading ? "Connecting..." : "Continue with Google"}
         </button>
 
         <div style={{display:"flex",alignItems:"center",gap:10,margin:"16px 0"}}>
@@ -781,7 +782,7 @@ function AuthScreen() {
 
         <div className="form-group">
           <label className="form-label">Password {mode==="signup"&&<span style={{fontWeight:400,textTransform:"none",letterSpacing:0}}>(min 6 characters)</span>}</label>
-          <input className="form-input" type="password" placeholder="••••••••" value={pass} onChange={e=>{setPass(e.target.value);clearErr();}} onKeyDown={e=>e.key==="Enter"&&(mode==="login"?handleLogin():handleSignup())}/>
+          <input className="form-input" type="password" placeholder="********" value={pass} onChange={e=>{setPass(e.target.value);clearErr();}} onKeyDown={e=>e.key==="Enter"&&(mode==="login"?handleLogin():handleSignup())}/>
         </div>
 
         {error && <div className="form-error" style={{marginBottom:10,padding:"8px 10px",background:"rgba(239,68,68,.08)",border:"1px solid rgba(239,68,68,.2)",borderRadius:"var(--r)"}}>{error}</div>}
@@ -793,7 +794,7 @@ function AuthScreen() {
         )}
 
         <button className="btn btn-primary w-full" style={{justifyContent:"center",padding:"11px"}} onClick={mode==="login"?handleLogin:handleSignup} disabled={loading}>
-          {loading ? "Please wait…" : mode==="login" ? "Sign In" : "Create Account"}
+          {loading ? "Please wait..." : mode==="login" ? "Sign In" : "Create Account"}
         </button>
 
         {mode==="signup" && (
@@ -835,7 +836,7 @@ function Sidebar({view, setView}) {
 
   return (
     <>
-      {/* Overlay — closes sidebar on tap outside */}
+      {/* Overlay -- closes sidebar on tap outside */}
       {sidebarOpen && (
         <div className="sidebar-overlay" onClick={closeSidebar}/>
       )}
@@ -949,13 +950,13 @@ function Topbar({view, setView}) {
       {showSearch&&(
         <div className="tb-search" style={{flex:1}}>
           <SVG n="search" s={14} c="var(--t3)"/>
-          <input ref={searchRef} placeholder="Search everything… (Esc to close)" value={state.searchQuery} onChange={e=>dispatch({type:"SET_SEARCH",payload:e.target.value})}/>
+          <input ref={searchRef} placeholder="Search everything... (Esc to close)" value={state.searchQuery} onChange={e=>dispatch({type:"SET_SEARCH",payload:e.target.value})}/>
           {state.searchQuery&&<button className="btn-icon" style={{width:20,height:20}} onClick={()=>dispatch({type:"SET_SEARCH",payload:""})}><SVG n="x" s={12}/></button>}
         </div>
       )}
 
       <div style={{display:"flex",gap:6,alignItems:"center",marginLeft:"auto",flexShrink:0}}>
-        <button className="tb-btn" title="Search (⌘K)" onClick={()=>setShowSearch(s=>!s)}>
+        <button className="tb-btn" title="Search (CmdK)" onClick={()=>setShowSearch(s=>!s)}>
           <SVG n="search" s={15}/>
         </button>
         {view==="model"&&activeModel&&(
@@ -1035,7 +1036,7 @@ function AIView() {
     const modelNames = state.models.map(m=>m.name).join(", ");
     const totalEntries = state.models.reduce((a,m)=>a+m.folders.reduce((b,f)=>b+f.entries.length,0),0);
 
-    setTimeout(()=>{
+    const aiTimer = setTimeout(()=>{
       setTyping(false);
       let response = getAIResponse(msg);
       // Personalize with real data
@@ -1043,6 +1044,7 @@ function AIView() {
       response = response.replace("8 entries total", `${totalEntries} entries total`);
       setMsgs(p=>[...p,{role:"bot",text:response}]);
     }, 1000 + Math.random()*800);
+    return () => clearTimeout(aiTimer);
   },[input, state.models]);
 
   return (
@@ -1054,7 +1056,7 @@ function AIView() {
         </div>
         <div>
           <div style={{fontWeight:700,fontSize:15}}>Vaultspace AI</div>
-          <div style={{fontSize:11,color:"var(--a3)",marginTop:1}}>● Online · Analyzing your {state.models.length} models</div>
+          <div style={{fontSize:11,color:"var(--a3)",marginTop:1}}>* Online . Analyzing your {state.models.length} models</div>
         </div>
       </div>
 
@@ -1084,7 +1086,7 @@ function AIView() {
 
       {/* Input */}
       <div className="ai-input-bar">
-        <textarea className="ai-input" placeholder="Ask anything about your workspace…" value={input} onChange={e=>setInput(e.target.value)} rows={1} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}}/>
+        <textarea className="ai-input" placeholder="Ask anything about your workspace..." value={input} onChange={e=>setInput(e.target.value)} rows={1} onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send();}}}/>
         <button className="ai-send" onClick={()=>send()}><SVG n="send" s={15} c="#fff"/></button>
       </div>
     </div>
@@ -1138,13 +1140,13 @@ function HomeView({setView}) {
                 <div style={{width:34,height:34,borderRadius:9,background:m.color+"20",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{m.icon}</div>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{fontSize:13,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{m.name}</div>
-                  <div style={{fontSize:11,color:"var(--t3)",marginTop:1}}>{m.folders.length} folders · {m.folders.reduce((a,f)=>a+f.entries.length,0)} entries</div>
+                  <div style={{fontSize:11,color:"var(--t3)",marginTop:1}}>{m.folders.length} folders . {m.folders.reduce((a,f)=>a+f.entries.length,0)} entries</div>
                 </div>
                 {m.pinned&&<SVG n="pin" s={11} c="var(--gold)"/>}
               </div>
             </div>
           ))}
-          <button className="btn btn-secondary w-full" style={{justifyContent:"center",marginTop:6}} onClick={()=>dispatch({type:"CREATE_MODEL",payload:{name:"New Model",icon:"⚡",color:COLORS[0]}})}>
+          <button className="btn btn-secondary w-full" style={{justifyContent:"center",marginTop:6}} onClick={()=>dispatch({type:"CREATE_MODEL",payload:{name:"New Model",icon:"Z",color:COLORS[0]}})}>
             <SVG n="plus" s={13}/>New Model
           </button>
         </div>
@@ -1237,40 +1239,122 @@ function EntryModal({entry, modelId, folderId, onClose}) {
     onClose();
   };
 
-  const typeColors = {note:"rgba(99,102,241,.15)",task:"rgba(34,197,94,.12)",link:"rgba(6,182,212,.12)",file:"rgba(245,158,11,.12)",image:"rgba(236,72,153,.12)"};
+  const typeConfig = {
+    note:  {color:"#6366f1", bg:"rgba(99,102,241,.15)",  border:"rgba(99,102,241,.4)",  label:"Note",  placeholder:"Write your notes, observations, research..."},
+    task:  {color:"#22c55e", bg:"rgba(34,197,94,.12)",   border:"rgba(34,197,94,.4)",   label:"Task",  placeholder:"Describe the task to be completed..."},
+    link:  {color:"#06b6d4", bg:"rgba(6,182,212,.12)",   border:"rgba(6,182,212,.4)",   label:"Link",  placeholder:"Paste the URL here..."},
+    file:  {color:"#f59e0b", bg:"rgba(245,158,11,.12)",  border:"rgba(245,158,11,.4)",  label:"File",  placeholder:"File name or description..."},
+    image: {color:"#ec4899", bg:"rgba(236,72,153,.12)",  border:"rgba(236,72,153,.4)",  label:"Image", placeholder:"Image description or caption..."},
+  };
+  const tc = typeConfig[form.type] || typeConfig.note;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal modal-lg" onClick={e=>e.stopPropagation()}>
-        <div className="modal-head"><div className="modal-title">{isNew?"New Entry":"Edit Entry"}</div><button className="btn-icon" onClick={onClose}><SVG n="x"/></button></div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:4}}>
-          <div className="form-group">
-            <label className="form-label">Type</label>
-            <div style={{display:"flex",gap:5,flexWrap:"wrap"}}>
-              {ENTRY_TYPES.map(t=>(
-                <button key={t} onClick={()=>setForm(f=>({...f,type:t}))} style={{padding:"5px 10px",borderRadius:"var(--r)",border:`1px solid ${form.type===t?"var(--a)":"var(--b)"}`,background:form.type===t?typeColors[t]:"transparent",color:form.type===t?"var(--t)":"var(--t3)",fontSize:11,cursor:"pointer",display:"flex",alignItems:"center",gap:4}}>
-                  <SVG n={t} s={11}/>{t}
+        <div className="modal-head">
+          <div className="modal-title">{isNew?"New Entry":"Edit Entry"}</div>
+          <button className="btn-icon" onClick={onClose}><SVG n="x"/></button>
+        </div>
+
+        {/* TYPE SELECTOR -- full width, large tap targets */}
+        <div className="form-group">
+          <label className="form-label">Entry Type</label>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:6}}>
+            {ENTRY_TYPES.map(t=>{
+              const cfg = typeConfig[t];
+              const sel = form.type===t;
+              return (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={()=>setForm(f=>({...f,type:t}))}
+                  style={{
+                    padding:"10px 4px",
+                    borderRadius:"var(--r)",
+                    border:`2px solid ${sel?cfg.border:"var(--b)"}`,
+                    background:sel?cfg.bg:"var(--bg2)",
+                    color:sel?cfg.color:"var(--t3)",
+                    fontSize:11,
+                    fontWeight:sel?700:400,
+                    cursor:"pointer",
+                    display:"flex",
+                    flexDirection:"column",
+                    alignItems:"center",
+                    gap:5,
+                    transition:"all .15s",
+                  }}
+                >
+                  <SVG n={t} s={16} c={sel?cfg.color:"var(--t3)"}/>
+                  <span style={{textTransform:"capitalize",fontFamily:"var(--ff)"}}>{cfg.label}</span>
                 </button>
-              ))}
-            </div>
+              );
+            })}
           </div>
-          <div className="form-group">
-            <label className="form-label">Folder</label>
-            <select className="form-select" value={selFolder} onChange={e=>setSelFolder(e.target.value)}>
-              {model?.folders.map(f=><option key={f.id} value={f.id}>{f.name}</option>)}
-            </select>
+          {/* Selected type indicator */}
+          <div style={{marginTop:8,padding:"6px 10px",background:tc.bg,border:`1px solid ${tc.border}`,borderRadius:"var(--r)",display:"flex",alignItems:"center",gap:6,fontSize:12,color:tc.color}}>
+            <SVG n={form.type} s={13} c={tc.color}/>
+            <span><strong>{tc.label}</strong> selected -- {form.type==="note"?"For research notes and observations":form.type==="task"?"For todos and action items":form.type==="link"?"For URLs and web resources":form.type==="file"?"For file references and attachments":"For image descriptions and charts"}</span>
           </div>
         </div>
-        <div className="form-group"><label className="form-label">Title</label><input className="form-input" value={form.title} onChange={e=>setForm(f=>({...f,title:e.target.value}))} placeholder="Entry title" autoFocus/></div>
-        <div className="form-group"><label className="form-label">Content</label><textarea className="form-textarea" rows={5} value={form.content} onChange={e=>setForm(f=>({...f,content:e.target.value}))} placeholder="Write your notes here…"/></div>
-        <div className="form-group"><label className="form-label">Tags</label><TagsInput value={form.tags} onChange={tags=>setForm(f=>({...f,tags}))}/></div>
-        <label style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer",fontSize:13,color:"var(--t2)",marginBottom:18}}>
-          <input type="checkbox" checked={form.pinned} onChange={e=>setForm(f=>({...f,pinned:e.target.checked}))} style={{accentColor:"var(--a)",width:14,height:14}}/>
-          Pin this entry
+
+        {/* FOLDER */}
+        <div className="form-group">
+          <label className="form-label">Folder</label>
+          <select className="form-select" value={selFolder} onChange={e=>setSelFolder(e.target.value)}>
+            {model?.folders.map(f=><option key={f.id} value={f.id}>{f.name}</option>)}
+          </select>
+        </div>
+
+        {/* TITLE */}
+        <div className="form-group">
+          <label className="form-label">Title</label>
+          <input className="form-input" value={form.title} onChange={e=>setForm(f=>({...f,title:e.target.value}))} placeholder="Entry title" autoFocus style={{borderColor:form.title?"var(--b)":"var(--b)"}}/>
+        </div>
+
+        {/* CONTENT -- changes label/placeholder based on type */}
+        <div className="form-group">
+          <label className="form-label">
+            {form.type==="note"?"Content / Notes":form.type==="task"?"Task Description":form.type==="link"?"URL / Link":form.type==="file"?"File Description":"Image Description"}
+          </label>
+          <textarea
+            className="form-textarea"
+            rows={form.type==="link"?2:5}
+            value={form.content}
+            onChange={e=>setForm(f=>({...f,content:e.target.value}))}
+            placeholder={tc.placeholder}
+            style={{borderColor:form.content?"var(--b)":"var(--b)"}}
+          />
+        </div>
+
+        {/* TASK SPECIFIC */}
+        {form.type==="task"&&(
+          <div className="form-group">
+            <label style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer",fontSize:13,color:"var(--t2)",padding:"10px 12px",background:"rgba(34,197,94,.06)",border:"1px solid rgba(34,197,94,.15)",borderRadius:"var(--r)"}}>
+              <input type="checkbox" checked={form.done||false} onChange={e=>setForm(f=>({...f,done:e.target.checked}))} style={{accentColor:"var(--green)",width:16,height:16}}/>
+              <span>Mark as completed</span>
+            </label>
+          </div>
+        )}
+
+        {/* TAGS */}
+        <div className="form-group">
+          <label className="form-label">Tags <span style={{fontWeight:400,textTransform:"none",letterSpacing:0,color:"var(--t4)"}}>(press Enter to add)</span></label>
+          <TagsInput value={form.tags} onChange={tags=>setForm(f=>({...f,tags}))}/>
+        </div>
+
+        {/* PIN */}
+        <label style={{display:"flex",alignItems:"center",gap:10,cursor:"pointer",padding:"10px 12px",background:"var(--bg2)",border:"1px solid var(--b)",borderRadius:"var(--r)",marginBottom:18}}>
+          <input type="checkbox" checked={form.pinned} onChange={e=>setForm(f=>({...f,pinned:e.target.checked}))} style={{accentColor:"var(--gold)",width:15,height:15}}/>
+          <SVG n="pin" s={13} c={form.pinned?"var(--gold)":"var(--t3)"}/>
+          <span style={{fontSize:13,color:form.pinned?"var(--gold)":"var(--t2)"}}>{form.pinned?"Pinned -- will appear at top":"Pin this entry"}</span>
         </label>
+
         <div style={{display:"flex",gap:8,justifyContent:"flex-end"}}>
           <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
-          <button className="btn btn-primary" onClick={save}>{isNew?"Create Entry":"Save Changes"}</button>
+          <button className="btn btn-primary" onClick={save} style={{background:tc.bg,border:`1px solid ${tc.border}`,color:tc.color,boxShadow:`0 2px 12px ${tc.color}30`}}>
+            <SVG n={form.type} s={13} c={tc.color}/>
+            {isNew?`Create ${tc.label}`:`Save ${tc.label}`}
+          </button>
         </div>
       </div>
     </div>
@@ -1410,7 +1494,7 @@ function DetailPanel({entry, folder, model}) {
           <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:14}}>
             <span className="badge badge-purple" style={{textTransform:"capitalize"}}>{entry.type}</span>
             {entry.pinned&&<span className="badge badge-gold">📌 Pinned</span>}
-            {entry.type==="task"&&<span className={`badge ${entry.done?"badge-green":"badge-red"}`}>{entry.done?"✓ Done":"○ Todo"}</span>}
+            {entry.type==="task"&&<span className={`badge ${entry.done?"badge-green":"badge-red"}`}>{entry.done?"v Done":"o Todo"}</span>}
           </div>
           {entry.content&&<div style={{fontSize:13.5,color:"var(--t2)",lineHeight:1.7,whiteSpace:"pre-wrap",marginBottom:16}}>{entry.content}</div>}
           {entry.tags.length>0&&(
@@ -1468,7 +1552,7 @@ function ModelView() {
               <h1 style={{fontSize:18,fontWeight:700}}>{model.name}</h1>
               {model.pinned&&<SVG n="pin" s={12} c="var(--gold)"/>}
             </div>
-            <div style={{fontSize:12,color:"var(--t3)",marginTop:2}}>{model.description||"No description"} · {model.folders.length} folders · {model.folders.reduce((a,f)=>a+f.entries.length,0)} entries</div>
+            <div style={{fontSize:12,color:"var(--t3)",marginTop:2}}>{model.description||"No description"} . {model.folders.length} folders . {model.folders.reduce((a,f)=>a+f.entries.length,0)} entries</div>
           </div>
           <div style={{display:"flex",gap:6,flexShrink:0}}>
             <button className="btn btn-secondary btn-sm" onClick={()=>setEditModal(true)}><SVG n="edit" s={12}/>Edit</button>
@@ -1490,7 +1574,7 @@ function ModelView() {
 
         {showNewFolder?(
           <div style={{display:"flex",gap:8,marginTop:10}}>
-            <input ref={folderRef} className="form-input" style={{flex:1}} placeholder="Folder name…" value={folderName} onChange={e=>setFolderName(e.target.value)} onKeyDown={e=>{if(e.key==="Enter")createFolder();if(e.key==="Escape"){setShowNewFolder(false);setFolderName("");}}}/>
+            <input ref={folderRef} className="form-input" style={{flex:1}} placeholder="Folder name..." value={folderName} onChange={e=>setFolderName(e.target.value)} onKeyDown={e=>{if(e.key==="Enter")createFolder();if(e.key==="Escape"){setShowNewFolder(false);setFolderName("");}}}/>
             <button className="btn btn-primary btn-sm" onClick={createFolder}>Create</button>
             <button className="btn btn-secondary btn-sm" onClick={()=>{setShowNewFolder(false);setFolderName("");}}>Cancel</button>
           </div>
@@ -1571,7 +1655,7 @@ function ActivityView() {
             <div style={{width:28,height:28,borderRadius:8,background:"rgba(99,102,241,.1)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,marginTop:1}}><SVG n="activity" s={12} c="var(--a2)"/></div>
             <div style={{flex:1}}>
               <div style={{fontSize:13}}><span style={{color:"var(--t3)"}}>{a.action}</span> <span style={{color:"var(--a2)",fontWeight:500}}>{a.target}</span></div>
-              <div style={{fontSize:10,color:"var(--t3)",marginTop:2,fontFamily:"var(--fm)"}}>{a.model} · {fmtDate(a.time)} {fmtTime(a.time)}</div>
+              <div style={{fontSize:10,color:"var(--t3)",marginTop:2,fontFamily:"var(--fm)"}}>{a.model} . {fmtDate(a.time)} {fmtTime(a.time)}</div>
             </div>
           </div>
         ))}
@@ -1599,75 +1683,4 @@ function SettingsView() {
         <SVG n="shield" s={18} c="var(--gold)"/>
         <div>
           <div style={{fontWeight:600,fontSize:13,color:"var(--gold)",marginBottom:4}}>Configure Firebase for Real Auth</div>
-          <div style={{fontSize:12,color:"var(--t3)",lineHeight:1.5}}>
-            To enable real Google Sign-In and email verification:<br/>
-            1. Go to <span style={{color:"var(--a2)"}}>console.firebase.google.com</span><br/>
-            2. Create a project → Enable Authentication<br/>
-            3. Add Google + Email/Password providers<br/>
-            4. Copy your config into the FIREBASE_CONFIG at top of App.jsx
-          </div>
-        </div>
-      </div>
-
-      <div className="card" style={{marginBottom:14}}>
-        <div style={{fontWeight:600,fontSize:14,marginBottom:14}}>Profile</div>
-        <div style={{display:"flex",gap:14,alignItems:"center",marginBottom:16}}>
-          <div className="avatar" style={{width:48,height:48,borderRadius:13,fontSize:16}}>{user?.avatar||"U"}</div>
-          <div>
-            <div style={{fontSize:14,fontWeight:600}}>{user?.name}</div>
-            <div style={{fontSize:12,color:"var(--t3)"}}>{user?.email}</div>
-            <div style={{marginTop:4}}><span className="badge badge-purple">{user?.plan||"Free"}</span>{user?.emailVerified&&<span className="badge badge-green" style={{marginLeft:5}}>✓ Verified</span>}</div>
-          </div>
-        </div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-          <div className="form-group"><label className="form-label">Display Name</label><input className="form-input" value={name} onChange={e=>setName(e.target.value)}/></div>
-          <div className="form-group"><label className="form-label">Email</label><input className="form-input" value={email} onChange={e=>setEmail(e.target.value)}/></div>
-        </div>
-        <button className="btn btn-primary btn-sm" onClick={()=>{dispatch({type:"LOGIN",payload:{...user,name,email}});toast("Profile updated","success");}}>Save Changes</button>
-      </div>
-
-      <div className="card" style={{marginBottom:14}}>
-        <div style={{fontWeight:600,fontSize:14,marginBottom:14}}>Keyboard Shortcuts</div>
-        {[["⌘K","Open search"],["⌘B","Toggle sidebar"],["Enter","Confirm / Save"],["Esc","Close modal"],["Double-click","Rename folder/entry"]].map(([k,d])=>(
-          <div key={k} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"7px 0",borderBottom:"1px solid var(--b)"}}>
-            <span style={{fontSize:12,color:"var(--t2)"}}>{d}</span>
-            <kbd style={{padding:"2px 8px",background:"var(--bg3)",border:"1px solid var(--b2)",borderRadius:5,fontSize:11,fontFamily:"var(--fm)",color:"var(--t2)"}}>{k}</kbd>
-          </div>
-        ))}
-      </div>
-
-      <div className="card">
-        <div style={{fontWeight:600,fontSize:14,marginBottom:4,color:"var(--red)"}}>Danger Zone</div>
-        <div style={{fontSize:12,color:"var(--t3)",marginBottom:12}}>Irreversible actions</div>
-        <button className="btn btn-danger btn-sm" onClick={async()=>{
-          try{const fb=await initFirebase();if(fb?.auth)await fb.signOut(fb.auth);}catch{}
-          dispatch({type:"LOGOUT"});toast("Signed out","info");
-        }}>
-          <SVG n="logout" s={12}/>Sign Out
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ============================================================
-// GLOBAL MODAL
-// ============================================================
-function GlobalModal() {
-  const {state, dispatch} = useStore();
-  const {modal} = state;
-  if(!modal) return null;
-  if(modal.type==="newEntry") return <EntryModal modelId={modal.modelId||state.activeModelId} folderId={modal.folderId} onClose={()=>dispatch({type:"CLOSE_MODAL"})}/>;
-  return null;
-}
-
-// ============================================================
-// EMAIL VERIFICATION BANNER
-// ============================================================
-function VerifyBanner() {
-  const {state, toast} = useStore();
-  if (!state.user || state.user.emailVerified !== false) return null;
-  return (
-    <div className="verify-banner">
-      <SVG n="mail" s={14} c="var(--gold)"/>
-      <span style={{flex:1}
+          <div style={{fontSize:12,color:"var(--t3)",lineHei
